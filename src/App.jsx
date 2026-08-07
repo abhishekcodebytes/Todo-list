@@ -5,6 +5,9 @@ function App() {
   const [todo, setTodo] = useState("");
   const [todos, setTodos] = useState([]);
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
+
   const handleChange = (e) => {
     setTodo(e.target.value);
   };
@@ -12,17 +15,30 @@ function App() {
   const handleAdd = () => {
     if (todo.trim() === "") return;
 
-    setTodos([...todos, { todo, isCompleted: false }]);
+    if (isEditing) {
+      const updatedTodos = [...todos];
+      updatedTodos[editIndex].todo = todo;
+      setTodos(updatedTodos);
+
+      setIsEditing(false);
+      setEditIndex(null);
+    } else {
+      setTodos([...todos, { todo, isCompleted: false }]);
+    }
+
     setTodo("");
   };
 
   const handleDelete = (index) => {
     const newTodos = todos.filter((_, i) => i !== index);
     setTodos(newTodos);
+    alert("Todo Deleted Successfully!");
   };
 
   const handleEdit = (index) => {
-    console.log("Edit:", index);
+    setTodo(todos[index].todo);
+    setIsEditing(true);
+    setEditIndex(index);
   };
 
   const handleCheckbox = (index) => {
@@ -55,7 +71,7 @@ function App() {
               onClick={handleAdd}
               className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
             >
-              Submit
+              {isEditing ? "Update" : "Submit"}
             </button>
           </div>
 
@@ -64,14 +80,13 @@ function App() {
           </h2>
 
           {todos.length === 0 ? (
-            <p className="text-gray-700">Wait for the Submit.</p>
+            <p className="text-gray-700">Nothing to show. 🥺</p>
           ) : (
             todos.map((item, index) => (
               <div
                 key={index}
                 className="flex items-center gap-3 mb-4"
               >
-                {/* Checkbox */}
                 <input
                   type="checkbox"
                   checked={item.isCompleted}
@@ -79,7 +94,6 @@ function App() {
                   className="w-5 h-5"
                 />
 
-                {/* White Box */}
                 <div className="flex-1 bg-white rounded-lg shadow p-3">
                   <span
                     className={
@@ -92,7 +106,6 @@ function App() {
                   </span>
                 </div>
 
-                {/* Edit */}
                 <button
                   onClick={() => handleEdit(index)}
                   className="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700"
@@ -100,7 +113,6 @@ function App() {
                   Edit
                 </button>
 
-                {/* Delete */}
                 <button
                   onClick={() => handleDelete(index)}
                   className="bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700"
