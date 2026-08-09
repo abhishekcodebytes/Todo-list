@@ -111,9 +111,10 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 pt-8 px-8">
-      <div className="bg-violet-300 rounded-xl w-full max-w-5xl p-8 shadow-lg mx-auto">
-
+    
+    <div className="min-h-screen bg-gray-100  p-8">
+      <div className="bg-violet-300 rounded-xl w-full max-w-5xl p-8 shadow-lg mx-auto mb-auto">
+      <h1 className="font-bold text-blue-600 text-center text-xl ">Save Your Task</h1>
         <h1 className="text-2xl font-bold mb-4">
           Add your list
         </h1>
@@ -198,6 +199,14 @@ function App() {
         )}
 
       </div>
+
+      {/* watermark */}
+      <footer className="text-center mt-8 pb-4 text-gray-600">
+  <p className="font-semibold">Made with ❤️ by Abhishek</p>
+  <p className="text-sm mt-1">
+    © 2026 Abhishek. All rights reserved.
+  </p>
+</footer>
     </div>
   );
 }
