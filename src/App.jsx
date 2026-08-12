@@ -112,7 +112,7 @@ function App() {
 
   return (
     
-    <div className="min-h-screen bg-gray-100  p-8">
+    <div className="min-h-screen bg-gray-100  p-8 flex flex-col">
       <div className="bg-violet-300 rounded-xl w-full max-w-5xl p-8 shadow-lg mx-auto mb-auto">
       <h1 className="font-bold text-blue-600 text-center text-xl ">Save Your Task</h1>
         <h1 className="text-2xl font-bold mb-4">
@@ -201,7 +201,7 @@ function App() {
       </div>
 
       {/* watermark */}
-      <footer className="text-center mt-8 pb-4 text-gray-600">
+      <footer className="text-center mt-auto pt-8 pb-4 text-gray-600">
   <p className="font-semibold">Made with ❤️ by Abhishek</p>
   <p className="text-sm mt-1">
     © 2026 Abhishek. All rights reserved.
